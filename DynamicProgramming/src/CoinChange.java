@@ -6,8 +6,6 @@ public class CoinChange {
 		int arr[] = {1, 2, 3};
 		int n = 10;
 		System.out.println(count(arr,n));
-		
-		
 	}
 	
 	public static int count( int[] S, int n )
