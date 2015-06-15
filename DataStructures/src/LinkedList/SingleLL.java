@@ -1,5 +1,7 @@
 package LinkedList;
 
+import LinkedList.SingleLL.Node;
+
 public class SingleLL {
 	
 	//Pointer to head node
@@ -61,7 +63,7 @@ public class SingleLL {
 		if(position == 1){
 			Node current = new Node(data);
 			current.setNext(node);
-			node = current ; 
+			headNode = current ; 
 		}
 		else{
 			//insert at position
@@ -181,5 +183,10 @@ public class SingleLL {
 		}
 		
 		return slow.getData(); 
+	}
+
+	public Node getHead() {
+		// TODO Auto-generated method stub
+		return headNode;
 	}
 }

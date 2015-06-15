@@ -13,16 +13,25 @@ public class SudokuSolver {
                 {0, 0, 0, 0, 0, 0, 0, 7, 4},
                 {0, 0, 5, 2, 0, 6, 3, 0, 0}};
 		
-		solveSudoku(grid);
+		if(recurseSudoku(grid) == true)
+		{
+			System.out.println("Solution exists");
+			for(int i = 0 ; i < grid.length ; i++)
+			{
+				for(int j = 0 ; j < grid.length ; j++)
+					System.out.print(grid[i][j] + " ");
+				System.out.println();
+			}
+				
+		}
+		else
+			System.out.println("Solution doesnt exist");
 	}
 	public static boolean isSafe(int[][] grid, int row, int column, int number)
 	{
-		if(isUsedInRow(grid, row, number) || 
-		   isUsedInColumn(grid, column, number) || 
-		   isUsedInBox(grid,row - (row % 3), column - (column%3), number))
-			return false;
-		
-		return true; 
+		return !isUsedInRow(grid, row, number) &&
+		           !isUsedInColumn(grid, column, number) &&
+		           !isUsedInBox(grid, row - row%3 , column - column%3, number);
 		
 	}
 	
@@ -30,16 +39,16 @@ public class SudokuSolver {
 	{
 		for(int i = 0 ; i < grid.length ; i++)
 			if(grid[row][i] == number)
-				return false ;
-		return true ;
+				return true ;
+		return false ;
 	}
 	
 	public static boolean isUsedInColumn(int[][] grid, int column, int number)
 	{
 		for(int i = 0 ; i < grid.length ; i++)
 			if(grid[i][column] == number)
-				return false ;
-		return true ;
+				return true ;
+		return false ;
 	}
 	
 	public static boolean isUsedInBox(int[][] grid, int boxStartX, int boxStartY, int number)
@@ -47,8 +56,8 @@ public class SudokuSolver {
 		for(int i = 0 ; i < 3 ; i++)
 			for(int j = 0 ; j < 3 ; j++)
 				if(grid[boxStartX + i][ boxStartY + j] == number)
-					return false ; 
-		return true ; 
+					return true ; 
+		return false ; 
 	}
 	
 	public static boolean recurseSudoku(int[][] grid)
@@ -84,27 +93,8 @@ public class SudokuSolver {
 					rColumn = k ;
 					return true ; 
 				}
-				
 			}	
 		}
 		return false; 
-	}
-	
-	public static void solveSudoku(int[][] grid)
-	{
-		if(recurseSudoku(grid) == true)
-		{
-			System.out.println("Solution exists");
-			for(int i = 0 ; i < grid.length ; i++)
-			{
-				for(int j = 0 ; j < grid.length ; j++)
-					System.out.print(grid[i][j] + " ");
-				System.out.println();
-			}
-				
-		}
-		else
-			System.out.println("Solution doesnt exist");
-		
 	}
 }

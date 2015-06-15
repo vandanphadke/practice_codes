@@ -1,9 +1,9 @@
 public class Path {
 	public static void main(String[] args) {
-		int[][] path = {{1,0,0,1}
+		int[][] path = {{1,0,0,0}
 			           ,{1,1,1,1}
-			           ,{0,1,0,1}
-			           ,{0,1,1,1}};
+			           ,{1,0,0,1}
+			           ,{1,0,1,1}};
 		
 		solvePath(path);
 	}
@@ -21,18 +21,17 @@ public class Path {
 			sol[xPos][yPos] = 1 ; 
 			return true ;	
 		}
+		
 		if(isSafe(path, xPos, yPos))
 		{
 			sol[xPos][yPos] = 1 ;
+			if(pathRecurse(path, xPos , yPos + 1, sol))
+				return true ;
 			
 			if(pathRecurse(path, xPos + 1 , yPos, sol))
 				return true ;
 			
-			if(pathRecurse(path, xPos , yPos + 1, sol))
-				return true ;
-			
-			sol[xPos][yPos] = 0 ; 
-			return false ; 
+			sol[xPos][yPos] = 0 ;  
 		}
 
 		return false ; 
