@@ -3,16 +3,10 @@ package LinkedList;
 public class Main {
 	public static void main(String[] args) {
 		//Tests for all Linked lists
-		SingleLL linkedList  = new SingleLL(10);
-		linkedList.insert(20);
-		linkedList.insert(30);
-		linkedList.insert(50);
-		linkedList.insert(30);
-		linkedList.insert(20);
-		linkedList.insert(10);
-		linkedList.printList();
-		//linkedList.insert(50);
-		
-		System.out.println(LLAlgos.checkifPalindrome(linkedList));
+		SingleLL ll1 = new SingleLL(2);
+		ll1.insert(1);ll1.insert(4);ll1.insert(2);ll1.insert(1);
+		ll1.printList();
+		LLAlgos.reverseK(ll1.getHead(), 3);
+		ll1.printList();
 	}
 }

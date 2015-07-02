@@ -1,0 +1,90 @@
+package Trees;
+
+public class BSTAlgos {
+
+	/**
+	 * @param root Root Node of a Binary Tree
+	 * @return if tree is BST or not
+	 */
+	public static boolean checkIfBst(Node root)
+	{
+		return (checkIfBst(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
+	}
+	
+	public static boolean checkIfBst(Node node, int min, int max)
+	{
+		/* an empty tree is BST */
+		  if (node==null) 
+		     return true;
+		       
+		  /* false if this node violates the min/max constraint */ 
+		  if (node.getKey() < min || node.getKey() > max) 
+		     return false; 
+		 
+		  /* otherwise check the subtrees recursively, 
+		   tightening the min or max constraint */
+		  return
+				  checkIfBst(node.getLeft(), min, node.getKey()-1) &&  // Allow only distinct values
+				  checkIfBst(node.getRight(), node.getKey()+1, max);  // Allow only distinct values
+	}
+	
+	/**
+	 * @param Root to BST, two nodes whose lca is to be found
+	 * @return LCA of the two nodes
+	 */
+	public static int lca(Node root, int l, int r){
+		Node current = root; 
+		while(current != null){
+			if(current.getKey() < l && current.getKey() < r)
+				current = current.getRight();
+			else if(current.getKey() > l && current.getKey() > r)
+				current = current.getLeft();
+			else
+				break;
+		}
+		return current.getKey(); 
+	}
+	
+	/**
+	 * Get inorder successor of a tree
+	 * @param Root of BST
+	 * @param Node whose successor is to be found
+	 */
+	public static int getInorderSuccessor(Node root, int n){
+		Node current = root, succ = null; 
+		while(current != null){
+			if(n < current.getKey()){
+				current = current.getLeft();
+				succ = root;
+			}
+			else if(n > current.getKey())
+				current = current.getRight();
+			
+			else
+				break;
+		}
+		return succ.getKey(); 
+	}
+	
+	/**
+	 * @param root Binary Tree root
+	 * @return size of maximum BST subtree
+	 */
+	public static int findLargestBSTSubtree(Node root){
+		
+		return 0 ; 
+	}
+	
+	public static int findLargestBSTSubtreeUtil(Node root, int min, int max, int maxnodes, Node largest){
+		if(root == null)
+			return 0;
+		
+		boolean isBST = true;
+		int leftNodes = findLargestBSTSubtreeUtil(root.getLeft(), min, max, maxnodes, largest);
+		int currMin = (leftNodes == 0)? root.getKey() : min ;
+		if(leftNodes == -1 || leftNodes != 0 && root.getKey() <= max)
+			isBST = false;
+		
+		return 0 ; 
+	}
+}

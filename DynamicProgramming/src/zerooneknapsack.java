@@ -1,5 +1,5 @@
-
 public class zerooneknapsack {
+	
 	public static void main(String[] args) {
 		int[] val = {60, 100, 120};
 	    int[] wt = {10, 20, 30};
@@ -10,7 +10,6 @@ public class zerooneknapsack {
 	
 	public static int knapSack(int weight[], int val[], int totalWeight)
 	{
-		
 		if(weight.length != val.length)
 			throw new IllegalArgumentException("Incorrect no of weight or values");
 		int no_of_items = weight.length ; 
@@ -23,17 +22,15 @@ public class zerooneknapsack {
 			{
 				if(i == 0 || j == 0)
 					sack[i][j] = 0 ; 
-				
+				else if(weight[i-1]<= j){
+					sack[i][j] = Math.max( val[i-1] + sack[i-1][j - weight[i-1]], sack[i-1][j]);
+				}
+				else{
+					sack[i][j] = sack[i-1][j];
+				}
 				
 			}
-		}
-		
-		return sack[no_of_items][totalWeight]; 
-	}
-	
-	public static int max(int a, int b)
-	{
-		if(a > b) 	return a ;
-		else 	return b ;
+		}		
+		return sack[no_of_items][totalWeight];
 	}
 }

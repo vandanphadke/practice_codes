@@ -1,36 +1,9 @@
 package LinkedList;
 
-import LinkedList.SingleLL.Node;
-
 public class SingleLL {
 	
 	//Pointer to head node
 	private Node headNode; 
-
-	//Individual Node class
-	public class Node
-	{
-		private int data ; 
-		private Node next ; 
-		
-		public Node(int data)
-		{
-			this.data = data ;
-		}
-
-		public int getData() {
-			return data;
-		}
-		public void setData(int data) {
-			this.data = data;
-		}
-		public Node getNext() {
-			return next;
-		}
-		public void setNext(Node next) {
-			this.next = next;
-		}
-	}
 
 	public SingleLL(int data){
 		headNode = new Node(data);
@@ -54,7 +27,7 @@ public class SingleLL {
 	
 	//for inserting new element at the specified position
 	public Node insert(int data, int position){return insert(headNode, data, position);}
-
+	
 	public Node insert(Node node, int data, int position)
 	{
 		if(position < 1 || position > size() + 1)
@@ -136,7 +109,7 @@ public class SingleLL {
 		Node current = headNode ; 
 		while(current != null)
 		{
-			System.out.print(current.data + "-->");
+			System.out.print(current.getData() + "-->");
 			current = current.getNext();
 		}
 		
@@ -176,11 +149,12 @@ public class SingleLL {
 	{
 		Node slow = node;
 		Node fast = node;
-		while(fast != null || fast.getNext().getNext() != null)
-		{
-			slow = slow.getNext();
-			fast = fast.getNext().getNext();
-		}
+		if(node != null)
+			while(fast != null && fast.getNext() != null)
+			{
+				slow = slow.getNext();
+				fast = fast.getNext().getNext();
+			}
 		
 		return slow.getData(); 
 	}
@@ -188,5 +162,9 @@ public class SingleLL {
 	public Node getHead() {
 		// TODO Auto-generated method stub
 		return headNode;
+	}
+	
+	public void setHead(Node head){
+		this.headNode = head ;
 	}
 }

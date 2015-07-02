@@ -5,29 +5,6 @@ public class LCS {
 		count("ABCDEF", "ACEDFG");
 	}
 	
-	public static void printLCS(char[][] dir, int i, int j, String X, String Y)
-	{
-		if(dir[i][j] == 'd')
-		{
-			printLCS(dir, i-1, j-1, X, Y);
-			System.out.println(X.charAt(i - 1));
-		}
-		
-		else if(dir[i][j] == 'l')
-		{
-			printLCS(dir, i, j-1, X, Y);
-		}
-		
-		else if(dir[i][j] == 'u')
-		{
-			printLCS(dir, i-1, j, X, Y);
-		}
-		
-		else 
-			return ; 
-		
-	}
-	
 	public static void  count(String X, String Y)
 	{
 		int m = X.length();
@@ -67,25 +44,31 @@ public class LCS {
 			}
 		}
 		
-		/*for(int i = 0 ; i < m+1 ; i++)
-		{
-			for(int j = 0 ; j < n+1 ; j++)
-			{
-				System.out.print(c[i][j] + " ");
-			}
-			System.out.println();
-		}
-		System.out.println();
-		for(int i = 0 ; i < m+1 ; i++)
-		{
-			for(int j = 0 ; j < n+1 ; j++)
-			{
-				System.out.print(dir[i][j] + " ");
-			}
-			System.out.println();
-		}*/
 		System.out.println(c[m][n]);
 		printLCS(dir, m, n, X, Y);
+	}
+	
+	public static void printLCS(char[][] dir, int i, int j, String X, String Y)
+	{
+		if(dir[i][j] == 'd')
+		{
+			printLCS(dir, i-1, j-1, X, Y);
+			System.out.println(X.charAt(i - 1));
+		}
+		
+		else if(dir[i][j] == 'l')
+		{
+			printLCS(dir, i, j-1, X, Y);
+		}
+		
+		else if(dir[i][j] == 'u')
+		{
+			printLCS(dir, i-1, j, X, Y);
+		}
+		
+		else 
+			return ; 
+		
 	}
 	
 	
