@@ -1,0 +1,15 @@
+package Trees;
+
+public class BinaryTreeAlgos {
+	public static void main(String[] args) {
+		
+	}
+	
+	static int preIndex = 0 ;
+	public static Node buildTreefromTraversals(int[] in, int[] pre, int start, int end){
+		if(start > end)
+			return null; 
+		
+		return null; 
+	}
+}

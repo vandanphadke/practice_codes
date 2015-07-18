@@ -1,0 +1,21 @@
+package Trees;
+
+public class BinaryTreeAlgos {
+	public static void main(String[] args) {
+		
+	}
+	
+	static int preIndex = 0 ;
+	public static Node buildTreefromTraversals(int[] in, int[] pre, int start, int end){
+		if(start > end)
+			return null;
+		
+		Node node = new Node(pre[preIndex++]);
+		if(start == end)
+			return node ;
+		
+		int inIndex = searchInInorder(in, start, end, node.getKey());
+		
+		return null; 
+	}
+}
