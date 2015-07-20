@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,4 +59,35 @@ public class GraphAdjListUndirected {
 	}
 	
 	public int getNoofVertices(){return Adjacency_List.size();}
+	
+	/**
+	 * Detect cycle in a undirected graph
+	 * http://www.geeksforgeeks.org/detect-cycle-undirected-graph/
+	 * @return boolean
+	 */
+	public boolean isCyclic(){
+		boolean[] visited = new boolean[no_of_vertices];
+		Arrays.fill(visited, false);
+		for(int i = 0 ; i < no_of_vertices ; ++i){
+			if(!visited[i])
+				if(isCyclicRecurse(i, visited, -1))
+					return true;
+		}
+		return false; 
+	}
+	
+	public boolean isCyclicRecurse(int vertex, boolean[] visited, int parent){
+		visited[vertex] = true;
+		ArrayList<Edge> adj_list = Adjacency_List.get(vertex);
+		for(Edge e: adj_list){
+			int dest = e.getDestination();
+			if(!visited[dest])
+				if(isCyclicRecurse(dest, visited, vertex))
+					return true;
+			else if(dest != parent){
+				return true; 
+			}
+		}
+		return false; 
+	}
 }

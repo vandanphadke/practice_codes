@@ -59,6 +59,20 @@ public class BST {
 		System.out.print(node.getKey());
 		printInorder(node.getRight());
 	}
+	
+	public void printPreorder()
+	{
+		printPreorder(head);
+	}
+	
+	private void printPreorder(Node node) {
+		if (node == null)
+			return;
+
+		System.out.print(node.getKey());
+		printPreorder(node.getLeft());
+		printPreorder(node.getRight());
+	}
 
 	public int getHeight()
 	{
@@ -90,12 +104,6 @@ public class BST {
 	/* Function to print level order traversal a tree*/
 	private void printLevelOrder(Node root)
 	{
-	  /*int h = getHeight(root);
-	  int i;
-	  for(i=1; i<=h; i++){
-		  printGivenLevel(root, i);
-		  System.out.println();
-	  }*/
 		Queue<Node> queue = new LinkedList<Node>();
 		queue.add(root);
 		while(!queue.isEmpty()){
@@ -107,20 +115,6 @@ public class BST {
 				queue.add(current.getRight());
 		}
 	}    
-	 
-	/* Print nodes at a given level */
-	private void printGivenLevel(Node root, int level)
-	{
-	  if(root == null)
-	    return;
-	  if(level == 1)
-	    System.out.print(root.getKey());
-	  else if (level > 1)
-	  {
-	    printGivenLevel(root.getLeft(), level-1);
-	    printGivenLevel(root.getRight(), level-1);
-	  }
-	}
 	
 	public boolean searchKey(int value)
 	{

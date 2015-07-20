@@ -2,55 +2,59 @@ import java.util.Arrays;
 
 public class Quicksort{
 	
-	static int no_of_swaps = 0 ; 
 	public static void main(String[] args) {
 		int[] arr = new int[]{1,3,9,8,2,7,5};
-		quickSort(arr, 0, arr.length - 1);
+		quickSort(arr);
 		System.out.println(Arrays.toString(arr));
-		
-		System.out.println(no_of_swaps);
 	}
 	
-	public static void quickSort(int[] arr, int low, int high)
-	{
-		int pivot ; 
-		
-		if(high > low){
-			pivot = partition(arr, low, high);
-			quickSort(arr, low, pivot - 1);
-			quickSort(arr, pivot + 1, high);
-		}	
-	}
+	public static void quickSort(int[] values) {
+	    // check for empty or null array
+	    if (values ==null || values.length==0){
+	      return;
+	    }
+	    quicksort(values, 0, values.length - 1);
+	  }
 
-	private static int partition(int[] arr, int low, int high) {
-		// TODO Auto-generated method stub
-		//move high to low element
-		int temp1  = arr[high];
-		arr[high] = arr[low];
-		arr[low]= temp1 ;
-		
-		int left = low, right = high, pivot_item = arr[low];
-		
-		while(left < right)
-		{
-			while(arr[left] <= pivot_item)
-				left++; 
-			while(arr[right] > pivot_item)
-				right--;
-			
-			if(left < right){
-				//exchange left and right
-				int temp = arr[right];
-				arr[right] = arr[left];
-				arr[left] = temp ;
-				no_of_swaps++;
-				//System.out.println(no_of_swaps);
-			}
-		}
-		
-		arr[low] = arr[right];
-		arr[right] = pivot_item;
-		no_of_swaps++;
-		return right;
-	}
+	private static void quicksort(int[] numbers, int low, int high) {
+	    int i = low, j = high;
+	    // Get the pivot element from the middle of the list
+	    int pivot = numbers[low + (high-low)/2];
+
+	    // Divide into two lists
+	    while (i <= j) {
+	      // If the current value from the left list is smaller then the pivot
+	      // element then get the next element from the left list
+	      while (numbers[i] < pivot) {
+	        i++;
+	      }
+	      // If the current value from the right list is larger then the pivot
+	      // element then get the next element from the right list
+	      while (numbers[j] > pivot) {
+	        j--;
+	      }
+
+	      // If we have found a values in the left list which is larger then
+	      // the pivot element and if we have found a value in the right list
+	      // which is smaller then the pivot element then we exchange the
+	      // values.
+	      // As we are done we can increase i and j
+	      if (i <= j) {
+	        exchange(numbers, i, j);
+	        i++;
+	        j--;
+	      }
+	    }
+	    // Recursion
+	    if (low < j)
+	      quicksort(numbers, low, j);
+	    if (i < high)
+	      quicksort(numbers, i, high);
+	  }
+
+	  private static void exchange(int[] numbers, int i, int j) {
+	    int temp = numbers[i];
+	    numbers[i] = numbers[j];
+	    numbers[j] = temp;
+	  }
 }

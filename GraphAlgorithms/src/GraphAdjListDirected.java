@@ -11,8 +11,7 @@ public class GraphAdjListDirected {
 		this.no_of_vertices = number_of_vertices;
 		Adjacency_List = new HashMap<Integer, ArrayList<Edge>>();	
         for (int i = 0 ; i < number_of_vertices ; i++)
-            Adjacency_List.put(i, new ArrayList<Edge>());
-        
+            Adjacency_List.put(i, new ArrayList<Edge>());        
 	}
 	
 	public void addEdge(int source, int destination, int weight){
@@ -57,4 +56,37 @@ public class GraphAdjListDirected {
 	}
 	
 	public int getNoofVertices(){return Adjacency_List.size();}
+	
+	/**
+	 * Algorithm to detect cycles for a directed graph
+	 * http://www.geeksforgeeks.org/detect-cycle-in-a-graph/
+	 * @return
+	 */
+	public boolean isCyclic(){
+		boolean[] visited = new boolean[no_of_vertices];
+		boolean[] recStack = new boolean[no_of_vertices];
+		
+		for(int i = 0 ; i < no_of_vertices ; i++){
+			if(isCyclicRecurse(i, visited, recStack))
+				return true; 
+		}
+		return false; 
+	}
+	
+	public boolean isCyclicRecurse(int vertex, boolean[] visited, boolean[] recStack){
+		if(visited[vertex] == false){
+			visited[vertex] = true; 
+			recStack[vertex] = true;
+			ArrayList<Edge> adj_list = Adjacency_List.get(vertex);
+			for(Edge e: adj_list){
+				int dest = e.getDestination();
+				if(!visited[dest] && isCyclicRecurse(dest, visited, recStack))
+					return true;
+				else if(recStack[dest] == true)
+					return true;
+			}
+		}
+		recStack[vertex] = false;
+		return false; 
+	}
 }

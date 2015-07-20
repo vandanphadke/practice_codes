@@ -40,6 +40,10 @@ public class GraphAdjMatDirected {
 	
 	public int getNoofVertices(){return max_vertex_count;}
 	
+	public int[][] getMatrix(){return adjMatrix;}
+	
+	public Vertex[] getVertexList(){return vertex_list;}
+	
 	public void addEdge(int srcVertex, int destVertex, int weight) {
 		if(srcVertex < 0 || srcVertex > max_vertex_count || destVertex < 0 || destVertex > max_vertex_count)
 			throw new IllegalArgumentException("These vertices do not exist");

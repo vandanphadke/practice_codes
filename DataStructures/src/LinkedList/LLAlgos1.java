@@ -1,10 +1,9 @@
 package LinkedList;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 
-public class LLAlgos {
+public class LLAlgos1 {
 
 	static Node left; 
 	//This is an implementation of checking of a singly linked list for a palindrome
@@ -51,7 +50,7 @@ public class LLAlgos {
 	
 	public static void deleteAlternate(SingleLL linkedlist){
 		Node head = linkedlist.getHead();
-		Node current = head, next;
+		Node current = head;
 		
 		while(current.getNext() != null){
 			if(current.getNext().getNext() == null){
