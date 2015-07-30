@@ -12,12 +12,7 @@ public class SlidingWindowMaximum {
 	public static void main(String[] args) {
 		int[] arr = {1,2,3,1,4,5,2,3,6};
 		int k = 3 ; 
-		//System.out.println(Arrays.toString(slidingWindowMaximum(arr, k)));
-		int a = 3, b = 5 ; 
-		a =  a + b ; 
-		b = a - b ; 
-		a = a - b ;
-		System.out.println(a + "  " + b);
+		System.out.println(Arrays.toString(slidingWindowMaximum(arr, k)));
 	}
 	
 	public static int[] slidingWindowMaximum(int[] arr, int k){
@@ -31,17 +26,19 @@ public class SlidingWindowMaximum {
 			
 			dequeue.addLast(i);
 		}
+		
 		for(; i < arr.length ; i++){
 			ans[a++] = arr[dequeue.peekFirst()];
-			while (!dequeue.isEmpty() && dequeue.peek() < i - k + 1) {
-                dequeue.poll();
+			while (!dequeue.isEmpty() && dequeue.peekFirst() < i - k + 1) {
+                dequeue.removeFirst();
             }
 			while(!dequeue.isEmpty() && arr[i] >= arr[dequeue.peekLast()])
 				dequeue.removeLast();
 			
 			dequeue.addLast(i);
 		}
-		
+		ans[a] = arr[dequeue.peekLast()];
 		return ans; 
+	
 	}
 }

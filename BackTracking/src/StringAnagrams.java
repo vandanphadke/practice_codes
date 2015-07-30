@@ -12,7 +12,7 @@ public class StringAnagrams {
 	
 	public static void printAnagramsRecurse(char[] s, int start, int end){
 		if(end == start){
-			System.out.println(Arrays.toString(s));
+			System.out.println(new String(s));
 		}
 		else{
 			for(int i = start ; i <= end ; i++){

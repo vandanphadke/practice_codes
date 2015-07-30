@@ -10,7 +10,7 @@ public class MinHeap {
 	
 	public MinHeap(int max_size) {
 		this.max_size = max_size; 
-		heap = new int[max_size];
+		heap = new int[max_size + 1];
 		this.size = 0 ;
 		heap[0] = Integer.MIN_VALUE;
 	}
@@ -27,8 +27,8 @@ public class MinHeap {
 		return (pos*2) + 1; 
 	}
 	
-	private boolean isLeaf(int pos){
-		if(pos >= (size / 2) && pos <= size)
+	public boolean isLeaf(int pos){
+		if(pos > (size / 2) && pos <= size)
 			return true; 
 		return false; 
 	}
@@ -66,7 +66,6 @@ public class MinHeap {
 	
 	public void printHeap(){
 		for(int i = 1 ; i <= size/2 ; i++){
-			//System.out.println("Parent: " + heap[i] + " Left: " + heap[getLeftChild(i)] + " Right: " + heap[getRightChild(i)]);
 			System.out.print("Parent : " + heap[i] + " ");
 			if(getLeftChild(i) <= size){
 				System.out.print("left " + heap[getLeftChild(i)]);
@@ -88,5 +87,13 @@ public class MinHeap {
 		heap[FRONT] = heap[size--];
 		minHeapify(FRONT);
 		return popped;
+	}
+	
+	public int getTopElement(){
+		return heap[FRONT];
+	}
+	
+	public boolean isEmpty(){
+		return (size==1);
 	}
 }

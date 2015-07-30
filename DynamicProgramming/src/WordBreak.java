@@ -8,7 +8,7 @@ import java.util.HashSet;
  */
 public class WordBreak {
 	public static void main(String[] args) {
-		System.out.println(checkwordbreak("mobileImobileI"));
+		System.out.println(checkwordbreak("mobileI"));
 	}
 	
 	public static boolean dictionaryContains(String word){
@@ -31,7 +31,7 @@ public class WordBreak {
 					return true;
 				
 				for(int j = i + 1 ; j <= size ; j++){
-					if(arr[j] == false && dictionaryContains(str.substring(i, j-i)))
+					if(arr[j] == false && dictionaryContains(str.substring(i, j)))
 						arr[j] = true;
 					
 					if(j == size && arr[j] == true)

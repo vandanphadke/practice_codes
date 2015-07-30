@@ -17,7 +17,7 @@ public class SingleLL {
 		Node current = node;
 		while(current != null){
 			current = current.getNext();
-			count+=1;
+			++count;
 		}
 		return count;
 	}
@@ -114,7 +114,6 @@ public class SingleLL {
 		}
 		
 		System.out.println("NULL");
-		System.out.println();
 	}
 
 	//Returns the position of data specified in data, if not returns -1
@@ -150,8 +149,7 @@ public class SingleLL {
 		Node slow = node;
 		Node fast = node;
 		if(node != null)
-			while(fast != null && fast.getNext() != null)
-			{
+			while(fast != null && fast.getNext() != null){
 				slow = slow.getNext();
 				fast = fast.getNext().getNext();
 			}

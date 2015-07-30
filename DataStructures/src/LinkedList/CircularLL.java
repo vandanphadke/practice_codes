@@ -67,7 +67,7 @@ public class CircularLL {
 			}
 			newNode.setNext(node);
 			current.setNext(newNode);
-			node = newNode;
+			headNode = newNode;
 		}
 		else if(position == size() + 1)
 		{
@@ -107,7 +107,6 @@ public class CircularLL {
 			return node.getData(); 
 		}
 		else{
-			//insert at position
 			Node current = node;
 			int count = 1 ; 
 			while(count < position){
@@ -134,6 +133,7 @@ public class CircularLL {
 			while(current.getNext() != headNode){
 				current = current.getNext();
 			}
+			headNode = current.getNext().getNext();
 			current.setNext(current.getNext().getNext());
 		}
 		else
@@ -188,22 +188,4 @@ public class CircularLL {
 
 		return -1 ; 
 	}
-
-	/*public int findMiddle()
-	{
-		return findMiddle(headNode);
-	}*/
-
-	/*public int findMiddle(Node node)
-	{
-		Node slow = node;
-		Node fast = node;
-		while(fast != null || fast.getNext().getNext() != null)
-		{
-			slow = slow.getNext();
-			fast = fast.getNext().getNext();
-		}
-
-		return slow.getData(); 
-	}*/
 }

@@ -80,7 +80,7 @@ public class BSTAlgos {
 	/**
 	 * Get inorder successor of a tree
 	 * @param Root of BST
-	 * @param Node whose successor is to be found
+	 * @param DoubleNode whose successor is to be found
 	 */
 	public static int getInorderSuccessor(Node root, int n){
 		Node current = root, succ = null; 
@@ -119,4 +119,39 @@ public class BSTAlgos {
 		
 		return 0 ; 
 	}
+	
+	/**
+	 * Returns the key closest to n present in the BST
+	 * @param root
+	 * @param n
+	 * @return
+	 */
+	public static int getCeil(Node root, int n){
+		if(root == null)
+			return -1;
+		
+		if(root.getKey() == n)
+			return n ;
+		
+		if(root.getKey() < n)
+			return getCeil(root.getRight(), n);
+		
+		int ceil = getCeil(root.getLeft(), n);
+		if(ceil >= n)
+			return ceil; 
+		else
+			return root.getKey();
+	}
+	
+	public static int convertToBST(Node root){
+		if(root == null)
+			return 0; 
+		
+		int old_val = root.getKey();
+		
+		root.setKey(convertToBST(root.getLeft()) + convertToBST(root.getRight()));
+		
+		return old_val + root.getKey();
+	}
+	
 }

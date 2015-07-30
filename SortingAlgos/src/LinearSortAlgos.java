@@ -40,12 +40,8 @@ public class LinearSortAlgos {
 	 * @return sorted array
 	 */
 	public static int[] bucketsort(int[] a, int maxVal) {
-	      int [] bucket=new int[maxVal+1];
-	 
-	      for (int i=0; i<bucket.length; i++) {
-	         bucket[i]=0;
-	      }
-	 
+	      int [] bucket = new int[maxVal+1];
+	      
 	      for (int i=0; i<a.length; i++) {
 	         bucket[a[i]]++;
 	      }
@@ -89,10 +85,6 @@ public class LinearSortAlgos {
 			}
 			
 		}
-		
-		
-		
-		
 		return a; 
 	}
 }

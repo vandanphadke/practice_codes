@@ -33,8 +33,32 @@ public class SnakeLadderProblem {
 		boolean[] visited = new boolean[n];
 		Queue<QueueVertex> queue = new LinkedList<QueueVertex>();
 		queue.add(new QueueVertex(0, 0));
-		visited[0] = true; 
-		return 0 ; 
+		visited[0] = true;
+		
+		QueueVertex v = null ; 
+		while(!queue.isEmpty()){
+			v = queue.poll();
+			int vertex = v.vertex;
+			
+			if(vertex == n - 1)
+				break;
+			
+			for(int j = vertex + 1 ; j <= vertex + 6 && j < n ; j++){
+				if(!visited[j]){
+					QueueVertex a = new QueueVertex(0, 0);
+					a.distance = v.distance + 1 ; 
+					visited[j] = true; 
+					
+					if(moves[j] != -1)
+						a.vertex = moves[j];
+					else
+						a.vertex = j ;
+					
+					queue.add(a);
+				}
+			}
+		}
+		return v.distance ;
 	}
 }
 

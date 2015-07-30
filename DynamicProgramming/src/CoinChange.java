@@ -12,15 +12,15 @@ public class CoinChange {
 	{
 	    int i, j, x, y;
 	 
-	    // We need n+1 rows as the table is consturcted in bottom up manner using 
+	    // We need n+1 rows as the table is constructed in bottom up manner using 
 	    // the base case 0 value case (n = 0)
 	    int[][] table = new int[n+1][S.length];
 	    
-	    // Fill the enteries for 0 value case (n = 0)
+	    // Fill the entries for 0 value case (n = 0)
 	    for (i=0; i<S.length; i++)
 	        table[0][i] = 1;
 	 
-	    // Fill rest of the table enteries in bottom up manner  
+	    // Fill rest of the table entries in bottom up manner  
 	    for (i = 1; i < n+1; i++)
 	    {
 	        for (j = 0; j < S.length; j++)

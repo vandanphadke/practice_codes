@@ -8,7 +8,6 @@ public class LICS {
 		// TODO Auto-generated method stub
 		int[] arr = new int[]{10, 22, 9, 33, 21, 50, 41, 60};
 		LIS(arr);
-
 	}
 	
 	public static int LIS(int[] arr)

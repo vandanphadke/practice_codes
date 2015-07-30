@@ -1,68 +1,95 @@
 package Heaps;
 
-import java.util.Arrays;
-
 public class MaxHeap {
-	int heap_count = 0 ;
-	int[] data;
+	private static final int FRONT = 1 ; 
+	private int[] heap ;
+	private int size = 0;
+	private int max_size;
 	
-	public MaxHeap(int[] heap){
-		this.heap_count = heap.length;
-		data = heap;
+	public MaxHeap(int max_size){
+		this.max_size = max_size;
+		heap = new int[max_size + 1];
+		heap[0] = Integer.MAX_VALUE;
 	}
 	
-	public int getParent(int i){
-		return i/2;
+	private int parent(int pos){
+		return (pos/2);
 	}
 	
-	public int getLeftChild(int parent){
-		return 2*parent + 1; 
+	private int leftChild(int pos){
+		return 2*pos;
 	}
 	
-	public int getRightChild(int parent){
-		return 2*parent + 2; 
+	private int rightChild(int pos){
+		return (2*pos + 1);
 	}
 	
-	public void max_heapify(int index){
-		int largest = index;
-		if(getLeftChild(index) >= heap_count - 1 )
-			return ; 
-		if(data[index] > data[getLeftChild(index)] )
-			largest = index;
-		else
-			largest = getLeftChild(index);
+	public void insert(int element){
+		if(size + 1 > max_size)
+			throw new IllegalArgumentException("Inserting element greater than max size");
 		
-		if(data[largest] < data[getRightChild(index)])
-			largest = getRightChild(index);
-		
-		if(largest != index){
-			//Swap elements largest and index
-			int temp = data[largest];
-			data[largest] = data[index];
-			data[index] = temp ;
-			max_heapify(largest);
+		heap[++size] = element;
+		int current = size;
+		while(heap[current] > heap[parent(current)]){
+			swap(current, parent(current));
+			current = parent(current);
+		}
+	}
+	
+	private void swap(int pos1, int pos2){
+		int temp = heap[pos1];
+		heap[pos1] = heap[pos2];
+		heap[pos2] = temp; 
+	}
+	
+	private boolean isLeaf(int pos){
+		if(pos > (size/2) && pos<= size)
+			return true;
+		return false; 
+	}
+	
+	private void maxHeapify(int pos){
+		if(!isLeaf(pos)){
+			if(heap[pos] < leftChild(pos) || heap[pos] < rightChild(pos)){
+				if(leftChild(pos) > rightChild(pos)){
+					swap(pos, leftChild(pos));
+					maxHeapify(leftChild(pos));
+				}
+				else{
+					swap(pos, rightChild(pos));
+					maxHeapify(rightChild(pos));
+				}
+			}
+		}
+	}
+	
+	private void buildMaxHeap(){
+		for(int i = size/2 ; i >= 1 ; i--){
+			maxHeapify(i);
 		}
 	}
 	
 	public void printHeap(){
-		System.out.println(Arrays.toString(data));
-	}
-	
-	public void build_max_heap(){
-		for(int i = data.length / 2 ; i >= 0 ; i--)
-			max_heapify(i);
-	}
-	
-	public void heapSort(){
-		build_max_heap();
-		for(int i = data.length - 1 ; i > 1 ; i--){
-			int temp = data[i];
-			data[i] = data[0];
-			data[0] = temp ;
-			printHeap();
-			--heap_count;
-			max_heapify(0);
+		for(int i = 1 ; i <= size/2 ; i++){
+			System.out.print("Parent : " + heap[i] + " ");
+			if(leftChild(i) <= size){
+				System.out.print("left " + heap[leftChild(i)]);
+			}
+			if(rightChild(i) <= size){
+				System.out.print(" Right " + heap[rightChild(i)]);
+			}
+			System.out.println();
 		}
 	}
 	
+	public int remove(){
+		int removed_element = heap[FRONT];
+		heap[FRONT] = heap[size--];
+		maxHeapify(FRONT);
+		return removed_element;
+	}
+	
+	public int getTopElement(){
+		return heap[FRONT];
+	}
 }
