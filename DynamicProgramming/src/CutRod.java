@@ -18,18 +18,27 @@ public class CutRod {
         revenue[0] = 0;
         revenue[1] = prices[1];
 
+        int[] points = new int[length + 1];
+
         for (int i = 2; i <= length; i++) {
             int l = i;
             int maxRevenue = Integer.MIN_VALUE;
 
             for (int j = 1; j <= l; ++j){
-                if (maxRevenue < (prices[j] + revenue[l - j]))
+                if (maxRevenue < (prices[j] + revenue[l - j])) {
                     maxRevenue = (prices[j] + revenue[l - j]);
+                    points[i] = j;
+                }
             }
             revenue[i] = maxRevenue;
         }
 
-        System.out.println(Arrays.toString(revenue));
+        int n = length;
+        while (n > 0){
+            System.out.println(points[n]);
+            n = n - points[n];
+        }
+
         return revenue[length];
     }
 }
