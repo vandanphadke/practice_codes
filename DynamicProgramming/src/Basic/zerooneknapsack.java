@@ -1,3 +1,5 @@
+package Basic;
+
 public class zerooneknapsack {
 	
 	public static void main(String[] args) {
