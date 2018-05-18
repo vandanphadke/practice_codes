@@ -12,6 +12,7 @@ public class MatrixMultiply {
 	public static int optimalmatrixMultiply(int[] mat){
 		int n = mat.length - 1;
 		int[][] data = new int[n + 1][n + 1];
+		int[][] seq = new int[n + 1][n + 1];
 
 		// Cost of multiplying a matrix to itself is 0
 		for(int i = 1 ; i < n+1 ; i++)
@@ -26,8 +27,10 @@ public class MatrixMultiply {
 				System.out.println("Current i: " + i + " Current j: " + j);
 				for(int k = i ; k < j ; k++){
 					q = data[i][k] + data[k+1][j] + mat[i-1]*mat[k]*mat[j];
-					if(q < data[i][j])
-							data[i][j] = q ; 
+					if(q < data[i][j]){
+						data[i][j] = q ;
+						seq[i][j] = k;
+					}
 				}
 			}
 		}
@@ -37,6 +40,19 @@ public class MatrixMultiply {
 			System.out.println(Arrays.toString(data[i]));
 		}
 
+		printActualSolution(seq, 1, n);
+		System.out.println();
 		return data[1][n];
+	}
+
+	public static void printActualSolution(int[][] seq, int i, int j){
+		if (i == j)
+			System.out.print("A");
+		else {
+			System.out.print("(");
+			printActualSolution(seq, i, seq[i][j]);
+			printActualSolution(seq, seq[i][j] + 1, j);
+			System.out.print(")");
+		}
 	}
 }
