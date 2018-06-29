@@ -1,3 +1,5 @@
+package implementations;
+
 import java.util.Arrays;
 
 public class CountingSort {
@@ -25,7 +27,7 @@ public class CountingSort {
 
         //Create sorted array
         int[] sortedArr = new int[unsortedArr.length];
-        for (int i = 0; i < unsortedArr.length; i++) {
+        for (int i = unsortedArr.length - 1; i >= 0; --i) {
             sortedArr[countArr[unsortedArr[i] - arrMin] - 1] = unsortedArr[i];
             --countArr[unsortedArr[i] - arrMin];
         }
