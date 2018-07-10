@@ -3,7 +3,7 @@ package Heaps;
 import java.util.PriorityQueue;
 
 /**
- * Q: Given an infinite stream of integers, find the k’th largest element at any point 
+ * Q: Given an infinite stream of integers, find the kth largest element at any point
  * of time.
  * @author Vandan Phadke
  * 
