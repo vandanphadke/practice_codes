@@ -1,8 +1,7 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
-public class MSTAlgos {
+public class PrimsMSTAlgo {
 	
 	public static void PrimsAlgo(GraphAdjListUndirected graph){
 		int max_vertices = graph.getNoofVertices();

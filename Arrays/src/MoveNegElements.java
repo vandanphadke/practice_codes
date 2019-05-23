@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Output : { 1  3  2  11  6  -1  -7  -5 }
  * */
 
-public class MoveNegElements {
+public class  MoveNegElements {
     public static void main(String[] args){
         int[] testArr = new int[]{1, -1, 3, 2, -7, -5, 11, 6 };
         processArray(testArr, testArr.length);
