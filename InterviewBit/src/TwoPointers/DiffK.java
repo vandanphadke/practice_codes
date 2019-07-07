@@ -1,5 +1,6 @@
 package TwoPointers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,8 +18,51 @@ import java.util.List;
  */
 public class DiffK {
 
-    public static int findPossibleDifference(List<Integer> num, int k){
+    public static void main(String[] args){
+        List<Integer> arr = new ArrayList<>();
+        arr.add(1);arr.add(3);arr.add(5);
+        System.out.println(findPossibleDifference(arr, 4));
+    }
 
+    public static int findPossibleDifferenceNew(List<Integer> num, int k){
+        int i = 0, j = 1;
+        while (j < num.size() && i < num.size()){
+            int diff = num.get(j) - num.get(i);
+
+            if (diff == k && i != j){
+                return 1;
+            }
+            else if (diff > k){
+                ++i;
+            }
+            else {
+                ++j;
+            }
+        }
+        return 0;
+    }
+
+
+
+    public static int findPossibleDifference(List<Integer> num, int k){
+        int i = 0, j = 1;
+        boolean right = true;
+
+        while (i < j) {
+            if (num.get(j) - num.get(i) == k)
+                return 1;
+            else {
+                if (right){
+                    j = binarySearchGreater(num, i, num.size() - 1, k - num.get(j));
+                    right = false;
+                }
+                else {
+                    i = binarySearchLesser(num, i, j, k - num.get(j));
+                    right = true;
+                }
+            }
+        }
+        return 0;
     }
 
     public static int binarySearchGreater(List<Integer> num, int start, int end, int toSearch){
