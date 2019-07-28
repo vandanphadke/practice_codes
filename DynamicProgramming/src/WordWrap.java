@@ -21,7 +21,7 @@ public class WordWrap {
 
             }
         }
-
+        return 0;
 
     }
 }

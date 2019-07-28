@@ -41,9 +41,9 @@ public class RecoverBST {
     }
 
     public static void main(String[] args){
-        TreeNode root = new TreeNode(1);
+        TreeNode root = new TreeNode(2);
         root.left = new TreeNode(3);
-        root.right = new TreeNode(2);
+        root.right = new TreeNode(1);
         System.out.println(recoverBST(root));
     }
 
@@ -64,23 +64,16 @@ public class RecoverBST {
             }
 
             current = inorderStack.pop();
-            if (curNode == null){
-                curNode = current;
+            if(prevNode == null)
                 prevNode = current;
-            }
-            else {
-                prevNode = curNode;
-                curNode = current;
-            }
-
-            if (curNode.val < prevNode.val){
-                if (first == null && second == null){
-                    first = prevNode;
-                    second = curNode;
+            else{
+                if(prevNode.val > current.val){
+                    if(first == null){
+                        first = prevNode;
+                    }
+                    second = current;
                 }
-                else {
-                    second = prevNode;
-                }
+                prevNode = current;
             }
 
             current = current.right;

@@ -32,6 +32,7 @@ public class CopyList {
     static class ListNode {
         public int val;
         public ListNode next;
+        public ListNode random;
 
         public ListNode(int x) {
             val = x;
@@ -45,15 +46,26 @@ public class CopyList {
     }
 
     public ListNode getListCopy(ListNode head){
+        if(head == null) return null;
+
         HashMap<ListNode, ListNode> copyMap = new HashMap<>();
 
         // Create a singly linked list
         ListNode current = head;
-        while (current != head){
 
+        // Create a copy of each node
+        while (current != null){
+            copyMap.put(current, new ListNode(current.val));
+            current = current.next;
         }
 
+        current = head;
+        while (current.next != null){
+            copyMap.get(current).next = copyMap.get(current.next);
+            copyMap.get(current).random = copyMap.get(current.random);
+            current = current.next;
+        }
 
-
+        return copyMap.get(head);
     }
 }

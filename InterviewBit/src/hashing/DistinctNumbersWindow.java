@@ -58,7 +58,7 @@ public class DistinctNumbersWindow {
                 distMap.put(element, distMap.get(element) - 1);
             }
 
-            // Add inwindow element
+            // Add in window element
             element = num.get(i);
 
             if (distMap.containsKey(element)){
