@@ -1,5 +1,6 @@
 package dynamicprogramming;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,7 +35,14 @@ import java.util.List;
  * Hence 2 will be the answer in this case.
  */
 public class LargestRectAreaPermutations {
-    // TODO once again
+    public static void main(String[] args){
+        List<Integer> a1 = Arrays.asList(0, 1, 0, 1, 0);
+        List<Integer> a2 = Arrays.asList(0, 1, 0, 1, 1);
+        List<Integer> a3 = Arrays.asList(1, 1, 0, 1, 0);
+        List<List<Integer>> arr = Arrays.asList(a1, a2, a3);
+        System.out.println(getLargestRectangleArea(arr));
+    }
+
     public static int getLargestRectangleArea(List<List<Integer>> arr){
         int m = arr.size(), n = arr.get(0).size();
         int[][] consecutive = new int[m][n];
@@ -49,31 +57,33 @@ public class LargestRectAreaPermutations {
             }
         }
 
-        for (int i = 0; i < m; i++) {
-            int count[] = new int[m + 1];
-            for (int j = 0; j < n; j++) {
-                count[consecutive[i][j]]++;
-            }
-            int col_no = 0;
-            for (int j = m; j >= 0; j--) {
-                if (count[j] > 0) {
-                    for (int k = 0; k < count[j]; k++) {
-                        consecutive[i][col_no] = j;
-                        col_no++;
-                    }
+        int area = 0, maxArea = Integer.MIN_VALUE;
+        for (int i = 0; i < m; ++i){
+            int[] sorted = countSort(consecutive[i], 0, m);
+            System.out.println(Arrays.toString(sorted));
+            for (int j = 0; j < m; j++) {
+                area = (j + 1) * sorted[j];
+                if (area > maxArea) {
+                    maxArea = area;
                 }
             }
         }
 
-        int curr_area, max_area = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                curr_area = (j + 1) * consecutive[i][j];
-                if (curr_area > max_area) {
-                    max_area = curr_area;
-                }
+        return maxArea;
+    }
+
+    public static int[] countSort(int[] arr, int low, int high){
+        int[] count = new int[high - low + 1];
+        for (int i : arr) ++count[i - low];
+        int i = arr.length - 1, j = 0;
+        while (i >= 0){
+            if (count[j] == 0) ++j;
+            else {
+                arr[i] = j + low;
+                --count[j];
+                --i;
             }
         }
-        return max_area;
+        return arr;
     }
 }

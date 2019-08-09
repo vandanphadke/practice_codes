@@ -21,6 +21,6 @@ public class GetSingleElement {
 			if(sum % 3 == 0)
 				result |= x ; 
 		}
-		return new Integer(result) ; 
+		return result ;
 	}
 }

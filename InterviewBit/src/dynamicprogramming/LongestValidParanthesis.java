@@ -14,6 +14,7 @@ public class LongestValidParanthesis {
 
 
     public static void main(String[] args){
+        System.out.println(getLengthLongestParanthesis("(()"));
         System.out.println(getLengthLongestParanthesis(")()())"));
         System.out.println(getLengthLongestParanthesis("))(("));
     }
@@ -35,7 +36,7 @@ public class LongestValidParanthesis {
                 left = right = 0;
             }
         }
-
+        left = right = 0;
         for (int i = brackets.length() - 1; i >= 0; --i) {
             if (brackets.charAt(i) == '(')
                 ++left;
@@ -51,6 +52,7 @@ public class LongestValidParanthesis {
                 left = right = 0;
             }
         }
+        System.out.println(max);
         return 2*max;
     }
 
