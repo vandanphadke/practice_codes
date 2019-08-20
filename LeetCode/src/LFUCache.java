@@ -23,7 +23,7 @@ public class LFUCache {
      * Why was LinkedHashSet used here instead of HashSet?
      * This is to take care of cases where multiple keys have the same access frequency. In that
      * case we have to remove the one which was added earlier (least recently used), so insertion
-     * order becomes important hence LinkedHashSet. 
+     * order becomes important hence LinkedHashSet.
      */
     Map<Integer, LinkedHashSet<Integer>> freqKey;
 

@@ -25,6 +25,9 @@ import java.util.List;
 public class BestTimeToBuyAndSellStocksIII {
     public static int getMaxProfit(List<Integer> prices){
         int n = prices.size();
+
+        // Calculate the maximum profit that could have been before this particular
+        // day.
         int[] leftProfit = new int[n];
         int min = prices.get(0);
         for (int i = 1; i < prices.size(); ++i){
@@ -32,9 +35,11 @@ public class BestTimeToBuyAndSellStocksIII {
             leftProfit[i] = Math.max(leftProfit[i-1], prices.get(i) - min);
         }
 
+        // Calculate the maximum profit that could have been after this particular
+        // day.
         int[] rightProfit = new int[n];
         int max = prices.get(n-1);
-        for (int i = n - 2; i >= 0; ++i){
+        for (int i = n - 2; i >= 0; --i){
             max = Math.max(prices.get(i), max);
             rightProfit[i] = Math.max(rightProfit[i+1], max - prices.get(i));
         }

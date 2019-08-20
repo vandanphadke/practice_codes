@@ -66,14 +66,16 @@ public class EvaluateExpressionTrue {
                 int j = i + l - 1;
                 dpPos[i][j] = 0;
                 dpNeg[i][j] = 0;
+                //System.out.println(i + "  " + j);
                 for (int k=i; k<=j-1; k++){
-                    if (valExp[i] == '&'){
+                    //System.out.println("k = " + k);
+                    if (valExp[k] == '&'){
                         dpPos[i][j] += (dpPos[i][k] * dpPos[k+1][j]);
                         dpNeg[i][j] += (dpNeg[i][k] * dpNeg[k+1][j]);
                         dpNeg[i][j] += (dpPos[i][k] * dpNeg[k+1][j]);
                         dpNeg[i][j] += (dpNeg[i][k] * dpPos[k+1][j]);
                     }
-                    else if (valExp[i] == '|'){
+                    else if (valExp[k] == '|'){
                         dpPos[i][j] += (dpPos[i][k] * dpPos[k+1][j]);
                         dpNeg[i][j] += (dpNeg[i][k] * dpNeg[k+1][j]);
                         dpPos[i][j] += (dpPos[i][k] * dpNeg[k+1][j]);
